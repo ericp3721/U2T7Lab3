@@ -54,7 +54,9 @@ public class CustomStringMethods {
              Example:  If orig is bananas, then the method returns the “Pig Latin” version, ananasbay
   */
     public String pigLatin(String orig) {
-
+        String newWord = orig.substring(1);
+        String firstLetter = orig.substring(0,1);
+        return(newWord + firstLetter + "ay");
     }
 
     /**Client provides myString and removeIdx and method returns a new String with the character
@@ -69,7 +71,14 @@ public class CustomStringMethods {
      this method should return the string "Halloween" (the original myString unchanged).
      */
     public String removeCharacter(String myString, int removeIdx) {
-
+        if (removeIdx != 0){
+            String word = myString.substring(removeIdx + 1,myString.length());
+            String word2 = myString.substring(0,removeIdx);
+            return(word2 + word);
+        }
+        else {
+            return(myString.substring(1));
+        }
     }
 
     /**Client provides orig, insertText, and searchStr, and the method returns a new String where
