@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class CustomStringMethods {
 
     /* this class has no instance variables */
@@ -71,13 +73,12 @@ public class CustomStringMethods {
      this method should return the string "Halloween" (the original myString unchanged).
      */
     public String removeCharacter(String myString, int removeIdx) {
-        if (removeIdx != 0){
-            String word = myString.substring(removeIdx + 1,myString.length());
-            String word2 = myString.substring(0,removeIdx);
-            return(word2 + word);
-        }
-        else {
-            return(myString.substring(1));
+        if (removeIdx >= 0 && removeIdx < myString.length()) {
+            String word2 = myString.substring(0, removeIdx);
+            String word = myString.substring(removeIdx + 1);
+            return word2 + word;
+        } else {
+            return myString;
         }
     }
 
@@ -95,7 +96,13 @@ public class CustomStringMethods {
      this method would return the String "ghostBOO!" (since searchStr is not found in orig).
      */
     public String insertAt(String orig, String insertText, String searchStr) {
+        int foundIndex = orig.indexOf(searchStr);
 
+        if (foundIndex == -1) {
+            return orig + insertText;
+        } else {
+            return orig.substring(0, foundIndex) + insertText + orig.substring(foundIndex);
+        }
     }
 
     /**Client provides myString and the method returns a new String with the last numToCap characters in
@@ -109,10 +116,16 @@ public class CustomStringMethods {
      Example:  If myString is "Gigantic!!" and numToCap is 3, this method returns the String
      "GigantiC!!"
      */
-    public String endUp(String myString, int numToCap){
+    public String endUp(String myString, int numToCap) {
+        if (myString.length() < numToCap) {
+            return myString.toUpperCase();
+        } else {
+            String cap = myString.substring(myString.length() - numToCap);
+            String word = myString.substring(0, myString.length() - numToCap);
+            return word + cap.toUpperCase();
 
+        }
     }
-
     /**Client provides myString and this method should return a String with all characters in myString
      in uppercase if the first letter of myString is an uppercase letter.  If the first letter of myString is a
      lowercase letter, this method should return a String with all characters in myString in lowercase.
@@ -124,7 +137,12 @@ public class CustomStringMethods {
      because the first letter of myString, "h", is a lowercase letter.
      */
     public String yellOrWhisper(String myString) {
-
+        String firstLetter = myString.substring(0,1);
+        if (firstLetter.toLowerCase().equals(firstLetter)){
+            return myString.toLowerCase();
+        }else{
+            return myString.toUpperCase();
+        }
     }
 }
 
